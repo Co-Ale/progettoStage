@@ -13,7 +13,8 @@ public class Shipment_details {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long idShipment;
-    @Id
+    
+   // @Id
     long idPallet;
 
     public Shipment_details(long idShipment, long idPallet) {

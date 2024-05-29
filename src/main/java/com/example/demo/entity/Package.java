@@ -16,11 +16,12 @@ public class Package {
     @GeneratedValue(strategy=GenerationType.AUTO)
     long id_package;
 
-   // @Column
+    @Column(name ="idPallet")
     long id_pallet;
     
     @Column(length = 100)
     String desc;
+
     @Column()
     float weight;
     

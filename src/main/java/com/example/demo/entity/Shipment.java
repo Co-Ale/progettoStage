@@ -19,12 +19,12 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.AUTO) 
     long id_customer;
 
-    @Column
+    @Column()
     String desc;
-    @Column
+    @Column()
     String shipment_date;
     
-    @Column
+    @Column()
     ShipmentState status;
 
     public Shipment(String desc, String shipment_date, long id_customer) {

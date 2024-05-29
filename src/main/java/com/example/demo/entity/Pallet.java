@@ -17,7 +17,7 @@ public class Pallet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    @Column
+    @Column()
     String desc;
     
     int max_packages;

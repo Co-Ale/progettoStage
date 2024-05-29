@@ -20,8 +20,8 @@ public class CustomerController {
     @PostMapping("/insert")
     public ResponseEntity<String> createCustomer(@RequestBody Customer model){
         try{
-            customerService.insert(model);
-           return new ResponseEntity<String>("Created", HttpStatus.CREATED);
+            customerService.create(model);
+            return new ResponseEntity<String>("Created id = " + model.getId() , HttpStatus.CREATED);
         }catch(Exception e ){
            return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -30,10 +30,14 @@ public class CustomerController {
 
     //DA METTERE di tipo Customer
     @GetMapping("/{customerId}")
-    public Customer getCustomer(@PathVariable int customerId){
+    public Customer getCustomer(@PathVariable long customerId){
         return customerService.findById(customerId);
     }
 
+    @GetMapping("/all")
+    public Iterable<Customer>  getAll(){
+        return customerService.getAll();
+    }
     /*
     @GetMapping("/all")
     public List<String> listCustomers(){
