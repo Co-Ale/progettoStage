@@ -13,10 +13,13 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="Package")
+@Table(name="Shipment")
 public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 
+    long id;
+
+    @Column()
     long id_customer;
 
     @Column()
@@ -26,6 +29,11 @@ public class Shipment {
     
     @Column()
     ShipmentState status;
+
+    
+    public long getId_shipment() {
+        return id;
+    }
 
     public Shipment(String desc, String shipment_date, long id_customer) {
         status =  ShipmentState.OPEN;

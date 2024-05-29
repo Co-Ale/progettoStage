@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Package")
+@Table(name="Pallet")
 public class Pallet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

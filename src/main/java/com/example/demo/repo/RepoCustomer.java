@@ -11,9 +11,9 @@ import com.example.demo.entity.Customer;
 
 
 public interface RepoCustomer extends CrudRepository<Customer, Long>{
-  
-  Iterable<Customer> findByEmail(String email);
 
-  Customer findById(long id); 
+    Iterable<Customer> findByEmail(String email);
+
+    Customer findById(long id); 
 }
 

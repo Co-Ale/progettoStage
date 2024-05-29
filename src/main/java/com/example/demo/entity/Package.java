@@ -21,7 +21,7 @@ public class Package {
     
     @Column(length = 100)
     String desc;
-
+    
     @Column()
     float weight;
     

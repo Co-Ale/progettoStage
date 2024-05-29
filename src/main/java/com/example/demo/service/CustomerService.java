@@ -15,10 +15,10 @@ public class CustomerService implements InterfaceCustomerService{
 
     
     @Override
-    public void create(Customer costumer) {
+    public void create(Customer customer) {
         // TODO Auto-generated method stub
         //throw new UnsupportedOperationException("Unimplemented method 'create'");
-        repoCustomer.save(costumer);
+        repoCustomer.save(customer);
         
     }
     @Override

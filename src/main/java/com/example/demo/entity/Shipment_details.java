@@ -12,22 +12,22 @@ import jakarta.persistence.Table;
 public class Shipment_details {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long idShipment;
+    long id;
     
    // @Id
     long idPallet;
 
-    public Shipment_details(long idShipment, long idPallet) {
-        this.idShipment = idShipment;
+    public Shipment_details(long id, long idPallet) {
+        this.id = id;
         this.idPallet = idPallet;
     }
 
-    public long getIdShipment() {
-        return idShipment;
+    public long getidShipment_details() {
+        return id;
     }
 
-    public void setIdShipment(long idShipment) {
-        this.idShipment = idShipment;
+    public void setidShipment_details(long id) {
+        this.id = id;
     }
 
     public long getIdPallet() {
@@ -41,7 +41,7 @@ public class Shipment_details {
     @Override
     public String toString() {
         return "Shipment_details{" +
-                "idShipment=" + idShipment +
+                "idShipment_details=" + id +
                 ", idPallet=" + idPallet +
                 '}';
     }
