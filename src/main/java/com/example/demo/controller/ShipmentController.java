@@ -22,22 +22,34 @@ public class ShipmentController {
     @PostMapping("/client/{clientId}")
     public ResponseEntity<String> createOrder(@PathVariable long clientId , @RequestBody Shipment model){
         try{
+            model.setId_customer(clientId);
             shipmentService.create(model);
             return new ResponseEntity<String>("Created shipment id = " + model.getId_shipment() , HttpStatus.CREATED);
         }catch ( Exception e ){
             return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-   
+    
     @GetMapping("/allOpenShipments")
-    public Iterable<Shipment>  getMethodName(@RequestParam String param) {
-        return shipmentService.getAll();
+    public Iterable<Shipment>  allOpenShipments() {//@RequestParam String param
+
+        return shipmentService.getAllOpen();
     }
+    
+}
     /*
+@PatchMapping("/closeShipment/{idShipment}")
+    private ResponseEntity<String> shipmentClose(@PathVariable long id ){
+        try{
+            shipmentService.closeShipment(id);
+            return new ResponseEntity<String>("shipment colse" , HttpStatus.OK );
+        }catch ( Exception e ){
+            return new ResponseEntity<String>( "id dosn't exist" + e.getMessage(),   HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @GetMapping("/byClientId/{clientId}")
     public Iterable<Shipment>  getCustomerSchipment(@PathVariable long clientId){
         return shipmentService.findByCustomertId(clientId);
     }
     */
-}

@@ -39,6 +39,7 @@ public class CustomerService implements InterfaceCustomerService{
     public Iterable<Customer> getAll() {
         // TODO Auto-generated method stub
         return repoCustomer.findAll();
+
        // throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
     

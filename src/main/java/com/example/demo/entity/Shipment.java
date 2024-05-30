@@ -22,7 +22,7 @@ public class Shipment {
     long id;
 
     @Column()
-    long id_customer;
+    long custumerId;
 
     @Column()
     String description;
@@ -32,19 +32,20 @@ public class Shipment {
     @Column()
     @Enumerated(EnumType.STRING)
     ShipmentState status;
-
     
-    public long getId_shipment() {
-        return id;
+    
+    public Shipment(){
     }
 
-    public Shipment(String description, String shipment_date, long id_customer) {
-        status =  ShipmentState.OPEN;
+    public Shipment(String description, String shipment_date, long custumerId) {
+        this.status =  ShipmentState.OPEN;
         this.description = description;
         this.shipment_date = shipment_date;
-        this.id_customer = id_customer;
+        this.custumerId = custumerId;
     }
-
+    public long getId_shipment() {
+            return id;
+        }
     public String getDesc() {
         return description;
     }
@@ -62,11 +63,11 @@ public class Shipment {
     }
 
     public long getId_customer() {
-        return id_customer;
+        return custumerId;
     }
 
-    public void setId_customer(long id_customer) {
-        this.id_customer = id_customer;
+    public void setId_customer(long custumerId) {
+        this.custumerId = custumerId;
     }
 
     public ShipmentState getStatus() {
@@ -82,7 +83,7 @@ public class Shipment {
         return "Shipment{" +
                 "desc='" + description + '\'' +
                 ", shipment_date='" + shipment_date + '\'' +
-                ", id_customer=" + id_customer +
+                ", custumerId=" + custumerId +
                 ", status=" + status +
                 '}';
     }
