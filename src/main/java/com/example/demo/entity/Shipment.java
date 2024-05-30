@@ -23,7 +23,7 @@ public class Shipment {
     long id_customer;
 
     @Column()
-    String desc;
+    String description;
     @Column()
     String shipment_date;
     
@@ -35,19 +35,19 @@ public class Shipment {
         return id;
     }
 
-    public Shipment(String desc, String shipment_date, long id_customer) {
+    public Shipment(String description, String shipment_date, long id_customer) {
         status =  ShipmentState.OPEN;
-        this.desc = desc;
+        this.description = description;
         this.shipment_date = shipment_date;
         this.id_customer = id_customer;
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String description) {
+        this.description = description;
     }
 
     public String getShipment_date() {
@@ -77,7 +77,7 @@ public class Shipment {
     @Override
     public String toString() {
         return "Shipment{" +
-                "desc='" + desc + '\'' +
+                "desc='" + description + '\'' +
                 ", shipment_date='" + shipment_date + '\'' +
                 ", id_customer=" + id_customer +
                 ", status=" + status +

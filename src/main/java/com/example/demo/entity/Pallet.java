@@ -18,11 +18,11 @@ public class Pallet {
     long id;
 
     @Column()
-    String desc;
+    String description;
     
     int max_packages;
-    Pallet (String desc, int max_packages){
-        this.desc = desc;
+    Pallet (String description, int max_packages){
+        this.description = description;
         this.max_packages = max_packages;
     }
 
@@ -30,15 +30,15 @@ public class Pallet {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public int getMax_packages() {
         return max_packages;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String description) {
+        this.description = description;
     }
 
     public void setMax_packages(int max_packages) {
@@ -48,7 +48,7 @@ public class Pallet {
     @Override
     public String toString() {
         return "Pallet{" +
-                "desc='" + desc + '\'' +
+                "desc='" + description + '\'' +
                 ", max_packages=" + max_packages +
                 '}';
     }
