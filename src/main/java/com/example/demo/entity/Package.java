@@ -20,14 +20,14 @@ public class Package {
     long id_pallet;
     
     @Column(length = 100)
-    String desc;
+    String description;
     
     @Column()
     float weight;
     
     
-    public Package(String desc, float weight, long id_pallet) {
-        this.desc = desc;
+    public Package(String description, float weight, long id_pallet) {
+        this.description = description;
         this.weight = weight;
         this.id_pallet = id_pallet;
     }
@@ -36,7 +36,7 @@ public class Package {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public float getWeight() {
@@ -47,8 +47,8 @@ public class Package {
         return id_pallet;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String description) {
+        this.description = description;
     }
 
     public void setWeight(float weight) {
@@ -62,7 +62,7 @@ public class Package {
     @Override
     public String toString() {
         return "Package{" +
-                "desc='" + desc + '\'' +
+                "desc='" + description + '\'' +
                 ", weight=" + weight +
                 ", id_pallet=" + id_pallet +
                 '}';
