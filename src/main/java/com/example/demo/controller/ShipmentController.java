@@ -20,7 +20,7 @@ public class ShipmentController {
     ShipmentService shipmentService;
     
     @PostMapping("/client/{clientId}")
-    public ResponseEntity<String> createOrder(@PathVariable long customerId , @RequestBody Shipment model){
+    public ResponseEntity<String> createOrder(@PathVariable long clientId , @RequestBody Shipment model){
         try{
             shipmentService.create(model);
             return new ResponseEntity<String>("Created shipment id = " + model.getId_shipment() , HttpStatus.CREATED);

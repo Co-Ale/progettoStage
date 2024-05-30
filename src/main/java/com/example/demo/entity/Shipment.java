@@ -6,6 +6,8 @@ import com.example.demo.utility.ShipmentState;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,6 +30,7 @@ public class Shipment {
     String shipment_date;
     
     @Column()
+    @Enumerated(EnumType.STRING)
     ShipmentState status;
 
     
