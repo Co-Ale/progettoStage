@@ -35,7 +35,7 @@ public class Package {
     public Package() {
     }
 
-    public String getDesc() {
+    public String getDescription() {
         return description;
     }
 
@@ -47,7 +47,7 @@ public class Package {
         return id_pallet;
     }
 
-    public void setDesc(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

@@ -21,15 +21,15 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.AUTO) 
     long id;
 
-    @Column()
+    @Column(name = "custumerId" ,nullable = true)
     long custumerId;
 
-    @Column()
+    @Column(name = "description" )
     String description;
-    @Column()
+    @Column(nullable = true)
     String shipment_date;
     
-    @Column()
+    @Column( name =  "status",nullable = true)
     @Enumerated(EnumType.STRING)
     ShipmentState status;
     
@@ -43,41 +43,47 @@ public class Shipment {
         this.shipment_date = shipment_date;
         this.custumerId = custumerId;
     }
-    public long getId_shipment() {
-            return id;
-        }
-    public String getDesc() {
-        return description;
+
+    public long getId() {
+        return this.id;
     }
 
-    public void setDesc(String description) {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getCustumerId() {
+        return this.custumerId;
+    }
+
+    public void setCustumerId(long custumerId) {
+        this.custumerId = custumerId;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
     }
 
     public String getShipment_date() {
-        return shipment_date;
+        return this.shipment_date;
     }
 
     public void setShipment_date(String shipment_date) {
         this.shipment_date = shipment_date;
     }
 
-    public long getId_customer() {
-        return custumerId;
-    }
-
-    public void setId_customer(long custumerId) {
-        this.custumerId = custumerId;
-    }
-
     public ShipmentState getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(ShipmentState status) {
         this.status = status;
     }
-
+    
     @Override
     public String toString() {
         return "Shipment{" +

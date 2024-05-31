@@ -22,9 +22,9 @@ public class ShipmentController {
     @PostMapping("/client/{clientId}")
     public ResponseEntity<String> createOrder(@PathVariable long clientId , @RequestBody Shipment model){
         try{
-            model.setId_customer(clientId);
+            model.setCustumerId(clientId);
             shipmentService.create(model);
-            return new ResponseEntity<String>("Created shipment id = " + model.getId_shipment() , HttpStatus.CREATED);
+            return new ResponseEntity<String>("Created shipment id = " + model.getId() , HttpStatus.CREATED);
         }catch ( Exception e ){
             return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
         }

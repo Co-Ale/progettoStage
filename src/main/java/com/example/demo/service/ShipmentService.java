@@ -56,6 +56,16 @@ public class ShipmentService implements InterfaceShipmentService {
         // TODO Auto-generated method stub
         //throw new UnsupportedOperationException("Unimplemented method 'getAllOpen'");
     }
+    public List<Shipment> getByClientId(long id) {
+        return repoShipment.findBycustumerId(id);
+        
+    }
+    public void closeShipment(long id){
+        Shipment sp = repoShipment.findById(id);
+        sp.setStatus(ShipmentState.CLOSED);
+        repoShipment.save(sp);
+    
+    }
 }
 /*
     

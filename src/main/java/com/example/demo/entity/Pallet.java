@@ -29,16 +29,24 @@ public class Pallet {
     public Pallet() {
     }
 
-    public String getDesc() {
-        return description;
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getMax_packages() {
-        return max_packages;
-    }
-
-    public void setDesc(String description) {
-        this.description = description;
+        return this.max_packages;
     }
 
     public void setMax_packages(int max_packages) {
