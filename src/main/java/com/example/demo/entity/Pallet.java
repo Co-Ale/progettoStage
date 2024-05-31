@@ -20,6 +20,7 @@ public class Pallet {
     @Column()
     String description;
     
+    @Column()
     int max_packages;
     Pallet (String description, int max_packages){
         this.description = description;

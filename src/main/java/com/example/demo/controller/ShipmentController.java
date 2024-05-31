@@ -35,6 +35,19 @@ public class ShipmentController {
 
         return shipmentService.getAllOpen();
     }
+    @GetMapping("/allShipments")
+    public Iterable<Shipment>  allShipments() {//@RequestParam String param
+        return shipmentService.getAll();
+    }
+    @PatchMapping("/closeShipment/{idShipment}")
+    private ResponseEntity<String> shipmentClose(@PathVariable Long idShipment ){
+        try{
+            shipmentService.closeShipment(idShipment);
+            return new ResponseEntity<String>("shipment colse" , HttpStatus.OK );
+        }catch ( Exception e ){
+            return new ResponseEntity<String>( "idShipment dosn't exist" + e.getMessage(),   HttpStatus.BAD_REQUEST);
+        }
+    }
     
 }
     /*

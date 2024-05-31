@@ -1,19 +1,23 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping(value = "/customer")
-public class PalletController {
+import com.example.demo.entity.Pallet;
+import com.example.demo.service.PalletService;
 
-    //@Autowired
-    //PalletService palletService;
+@RestController
+@RequestMapping(value = "")
+public class PalletController {
+    
+    @Autowired
+    private PalletService palletService;
 
 
     @PostMapping("/shipment/{shipmentId}")
-    public void createCustomer(Model model){
-
+    public void createCustomer(@RequestBody Pallet model, @PathVariable long shipmentId ){
+        palletService.create(model, shipmentId );
     }
 
 

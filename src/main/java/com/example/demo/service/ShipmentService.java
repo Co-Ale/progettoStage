@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
+import java.text.SimpleDateFormat;
+//import java.io.*; 
+//import java.util.List;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 
 import com.example.demo.entity.Shipment;
 import com.example.demo.repo.RepoShipment;
 import com.example.demo.utility.ShipmentState;
-
-//import java.io.*; 
-import java.util.*; 
-//import java.util.List;
 
 
 @Service
@@ -37,6 +37,10 @@ public class ShipmentService implements InterfaceShipmentService {
     public void create(Shipment sp) {
         // TODO Auto-generated method stub
         //throw new UnsupportedOperationException("Unimplemented method 'create'");
+        Date oggi = new Date();   // Data di oggi
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");   // Qui decido il formato di visualizzazione
+
+        sp.setShipment_date(sdf.format( oggi ));
         sp.setStatus( ShipmentState.OPEN);
         repoShipment.save(sp);
     }

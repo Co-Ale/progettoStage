@@ -16,7 +16,7 @@ public class Package {
     @GeneratedValue(strategy=GenerationType.AUTO)
     long id_package;
 
-    @Column(name ="idPallet")
+    @Column(name ="palletId")
     long id_pallet;
     
     @Column(length = 100)
