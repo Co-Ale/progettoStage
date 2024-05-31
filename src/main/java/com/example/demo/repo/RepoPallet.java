@@ -18,7 +18,9 @@ public interface RepoPallet extends CrudRepository<Pallet ,Long> {
 
    // List<Pallet> findByStatus(ShipmentState status);
   //  List<Pallet> findBycustumerId(long id);
-    Pallet findById(long id); 
+    Pallet findById(long id);
+
+    //List<Pallet> findAllBy(long id);
     //Iterable<Shipment> findById_customer(long id_customer);
    // Iterable<Shipment> findB (String email);
 }
