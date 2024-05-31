@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/pallet")
+@RequestMapping(value = "/package")
 public class PackageController {
 
     //@Autowired
@@ -13,7 +13,7 @@ public class PackageController {
 
     @PostMapping("/pallet/{palletId} ")
     public void PostPallet(Model model){
-
+        
     }
 
 

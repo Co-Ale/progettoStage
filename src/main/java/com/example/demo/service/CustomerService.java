@@ -16,20 +16,19 @@ public class CustomerService implements InterfaceCustomerService{
     
     @Override
     public void create(Customer customer) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'create'");
+      
         repoCustomer.save(customer);
         
     }
     @Override
     public void update(long id, Customer costumer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+       
+        repoCustomer.save(costumer);
+      
     }
     @Override
     public void delete(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repoCustomer.deleteById(id);
     }
     @Override
     public Customer findById(long id) {
@@ -37,10 +36,8 @@ public class CustomerService implements InterfaceCustomerService{
     }
     @Override
     public Iterable<Customer> getAll() {
-        // TODO Auto-generated method stub
-        return repoCustomer.findAll();
 
-       // throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        return repoCustomer.findAll();
     }
     
     /* 

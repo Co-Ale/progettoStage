@@ -21,22 +21,13 @@ public class ShipmentService implements InterfaceShipmentService {
 
     @Override
     public Iterable<Shipment>  getAll() {
-        // TODs Auto-generated method stub
-       // throw new UnsupportedOperationException("Unimplemented method 'getAll'");
        return repoShipment.findAll();
     }
-   /*  public Iterable<Shipment>  allOpenShipment() {
-     //   getAll()
-     //   Iterable<Shipment> openn new 
-        
-    
 
-    }*/
 
     @Override
     public void create(Shipment sp) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'create'");
+
         Date oggi = new Date();   // Data di oggi
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");   // Qui decido il formato di visualizzazione
 
@@ -44,31 +35,33 @@ public class ShipmentService implements InterfaceShipmentService {
         sp.setStatus( ShipmentState.OPEN);
         repoShipment.save(sp);
     }
-
-  
-
     @Override
     public void delete(long id) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repoShipment.deleteById(id);
+
     }
-   
+    @Override
     public List<Shipment> getAllOpen() {
 
         return repoShipment.findByStatus(ShipmentState.OPEN);
-        // return repoShipment.findAll();
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'getAllOpen'");
+  
     }
+    @Override
     public List<Shipment> getByClientId(long id) {
         return repoShipment.findBycustumerId(id);
         
     }
+    @Override
     public void closeShipment(long id){
         Shipment sp = repoShipment.findById(id);
         sp.setStatus(ShipmentState.CLOSED);
         repoShipment.save(sp);
     
+    }
+    @Override
+    public void update( Shipment shipment) {
+        repoShipment.save(shipment);
+        
     }
 }
 /*

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Pallet;
-import com.example.demo.entity.Shipment;
+//import com.example.demo.entity.Shipment;
 import com.example.demo.entity.Shipment_det;
 import com.example.demo.repo.RepoShipmentDetails;
 import com.example.demo.repo.RepoPallet;
