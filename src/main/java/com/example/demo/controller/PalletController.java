@@ -32,9 +32,14 @@ public class PalletController {
 
 
     @GetMapping("/byShipmentId/{byShipmentId}")
-    public Iterable<Pallet> getByShipmentId(@PathVariable int byShipmentId){
-       return palletService.getByShipmentId(byShipmentId);
-       // return "/byPalletId/" + palletId;
+    public ResponseEntity<?> getByShipmentId(@PathVariable Long byShipmentId){
+        try{
+            return new ResponseEntity<> (palletService.getByShipmentId(byShipmentId) , HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>( e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        //return palletService.getByShipmentId(byShipmentId);
+        //return "/byPalletId/" + palletId;
     }
 
 

@@ -31,13 +31,21 @@ public class ShipmentController {
     }
     
     @GetMapping("/allOpenShipments")
-    public Iterable<Shipment>  allOpenShipments() {//@RequestParam String param
-
-        return shipmentService.getAllOpen();
+    public ResponseEntity<?>  allOpenShipments() {//@RequestParam String param
+        try{
+            return new ResponseEntity<>( shipmentService.getAllOpen(), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
     @GetMapping("/allShipments")
-    public Iterable<Shipment>  allShipments() {//@RequestParam String param
-        return shipmentService.getAll();
+    public ResponseEntity<?>  allShipments() {//@RequestParam String param
+        try {
+            return new ResponseEntity<>( shipmentService.getAll() , HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        
     }
     @PatchMapping("/closeShipment/{idShipment}")
     private ResponseEntity<String> shipmentClose(@PathVariable Long idShipment ){
@@ -45,7 +53,7 @@ public class ShipmentController {
             shipmentService.closeShipment(idShipment);
             return new ResponseEntity<String>("shipment colse" , HttpStatus.OK );
         }catch ( Exception e ){
-            return new ResponseEntity<String>( "idShipment dosn't exist" + e.getMessage(),   HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>( "Error shipment fail to colse"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
         }
     }
     

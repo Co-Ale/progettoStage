@@ -22,7 +22,7 @@ public class PalletService {
     @Autowired
     private RepoPallet repoPallet;
 
-    public void create( Pallet pallet, long shipmentId){
+    public void create( Pallet pallet, Long shipmentId){
 
         pallet.setId(0);
         repoPallet.save(pallet);
@@ -33,13 +33,18 @@ public class PalletService {
         
     }
     
-    public List<Pallet> getByShipmentId(long sPId) {
+    public List<Pallet> getByShipmentId(Long sPId) throws Exception {
         List<Shipment_det> idList = repoShipmentDetails.findByIdShipment(sPId);
         List<Pallet> palList = new ArrayList<>();
         for (Shipment_det elemento : idList) {
-            palList.add(repoPallet.findById(elemento.getIdPallet()));
+            palList.add(repoPallet.findById(elemento.getIdPallet()).get());
         }
-        return palList;
+        if (!palList.isEmpty()) {
+            return palList;                
+        }else{
+            throw new Exception ("Pallet not found by Shipment id Exeption");
+        }
+        
     }
 
 }

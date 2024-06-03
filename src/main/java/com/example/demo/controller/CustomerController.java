@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +31,23 @@ public class CustomerController {
 
     //DA METTERE di tipo Customer
     @GetMapping("/{customerId}")
-    public Customer getCustomer(@PathVariable long customerId){
-        return customerService.findById(customerId);
+    public ResponseEntity<?> getCustomer(@PathVariable long customerId){
+        try{
+            return new ResponseEntity<Customer>( customerService.findById(customerId), HttpStatus.FOUND);
+        }catch(Exception e ){
+            return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        
     }
 
     @GetMapping("/all")
-    public Iterable<Customer>  getAll(){
-        return customerService.getAll();
+    public ResponseEntity<?>  getAll(){
+        try{
+            return new ResponseEntity<>( customerService.getAll(), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        
     }
     /*
     @GetMapping("/all")

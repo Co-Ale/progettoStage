@@ -18,6 +18,6 @@ public interface RepoShipmentDetails extends CrudRepository<Shipment_det, Long>{
     //Iterable<Shipment_details> findByEmail(String email);
 
     Shipment_det findById(long id); 
-    List<Shipment_det> findByIdShipment(long idShipment); 
+    List<Shipment_det> findByIdShipment(Long idShipment); 
 }
 

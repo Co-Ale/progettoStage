@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 //import java.util.List;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,21 +42,39 @@ public class ShipmentService implements InterfaceShipmentService {
 
     }
     @Override
-    public List<Shipment> getAllOpen() {
-
-        return repoShipment.findByStatus(ShipmentState.OPEN);
-  
-    }
-    @Override
-    public List<Shipment> getByClientId(long id) {
-        return repoShipment.findBycustumerId(id);
+    public List<Shipment> getAllOpen() throws Exception {
+        List<Shipment> allOpSp =repoShipment.findByStatus(ShipmentState.OPEN);
+        if(!allOpSp.isEmpty()){
+            return allOpSp;
+        }else{
+            throw new Exception("none Open shipment Exeption");
+        }
+        //return repoShipment.findByStatus(ShipmentState.OPEN);
         
     }
     @Override
-    public void closeShipment(long id){
-        Shipment sp = repoShipment.findById(id);
-        sp.setStatus(ShipmentState.CLOSED);
-        repoShipment.save(sp);
+    public List<Shipment> getByClientId(Long id)throws Exception  {
+        //return repoShipment.findBycustumerId(id);
+        List<Shipment> spByClienId =repoShipment.findBycustumerId(id);
+        if(!spByClienId.isEmpty()){
+            return spByClienId;
+        }else{
+            throw new Exception("Customer Shipment list empty Exeption");
+        }
+        
+    }
+    @Override
+    public void closeShipment(Long id) throws Exception{
+        Optional<Shipment>  sp =  repoShipment.findById(id);
+        if(sp.isPresent()){
+            sp.get().setStatus(ShipmentState.CLOSED);
+            repoShipment.save(sp.get());
+        }else{
+            throw new Exception("Shipment not found");
+        }
+
+        
+      
     
     }
     @Override

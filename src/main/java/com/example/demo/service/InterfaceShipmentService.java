@@ -11,10 +11,10 @@ public interface InterfaceShipmentService {
     public void update(Shipment shipment);
     public void delete(long id);
   
-    public Iterable<Shipment> getAll();
-    public List<Shipment> getByClientId(long id);
-    public void closeShipment(long id);
-    public List<Shipment> getAllOpen();
+    public Iterable<Shipment> getAll() throws Exception;
+    public List<Shipment> getByClientId(Long id) throws Exception;
+    public void closeShipment(Long id) throws Exception;
+    public List<Shipment> getAllOpen()  throws Exception ;
     //public Collection<Customer> get();
     //public java.lang.Iterable<Shipment> findByCustomertId(long id);
     //  public void update(long id, Shipment shipment);
