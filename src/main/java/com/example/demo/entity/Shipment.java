@@ -2,15 +2,20 @@ package com.example.demo.entity;
 
 
 
+import org.hibernate.annotations.ManyToAny;
+
 import com.example.demo.utility.ShipmentState;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -21,9 +26,19 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.AUTO) 
     long id;
 
+    
+    
     @Column(name = "custumerId" ,nullable = true)
     long custumerId;
-
+    @ManyToOne
+    @JoinColumn(name =  "userId")
+    private Customer user;
+    /*
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "custumerId")
+    private Customer custumerId;
+     */
+    
     @Column(name = "description" )
     String description;
     @Column(nullable = true)

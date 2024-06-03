@@ -1,19 +1,39 @@
 package com.example.demo.controller;
 
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+
+import com.example.demo.entity.Package;
+
+
+import com.example.demo.service.PackageService;
+
 import org.springframework.web.bind.annotation.*;
+import java.lang.Long;
+
 
 @RestController
 @RequestMapping(value = "/package")
 public class PackageController {
 
-    //@Autowired
-    //PalletService palletService;
+    @Autowired
+    PackageService packageService;
 
 
     @PostMapping("/pallet/{palletId} ")
-    public void PostPallet(Model model){
-        
+    public ResponseEntity<?> PostPallet(@PathVariable Long id, @RequestBody Package model){
+        try {
+            
+            packageService.create(id,model);
+            
+            return new ResponseEntity<> ( "created package id = "+ model.getId() , HttpStatus.CREATED );
+    
+        } catch (Exception e) {
+            return new ResponseEntity<> (e.getMessage() ,HttpStatus.BAD_REQUEST );
+
+        }
     }
 
 

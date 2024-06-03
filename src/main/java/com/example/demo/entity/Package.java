@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.lang.Long;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,55 +9,64 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name="Package")
-
 public class Package {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    long id_package;
+    Long id;
 
-    @Column(name ="palletId")
-    long id_pallet;
+    @Column(name ="idPallet")
+    long idPallet;
     
     @Column(length = 100)
     String description;
     
     @Column()
     float weight;
+
+   
     
-    
-    public Package(String description, float weight, long id_pallet) {
+    public Package(String description, float weight, long idPallet) {
         this.description = description;
         this.weight = weight;
-        this.id_pallet = id_pallet;
+        this.idPallet = idPallet;
     }
 
     public Package() {
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public long getIdPallet() {
+        return this.idPallet;
+    }
+
+    public void setId_pallet(long idPallet) {
+        this.idPallet = idPallet;
+    }
+
     public String getDescription() {
-        return description;
-    }
-
-    public float getWeight() {
-        return weight;
-    }
-
-    public long getId_pallet() {
-        return id_pallet;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public float getWeight() {
+        return this.weight;
     }
 
-    public void setId_pallet(long id_pallet) {
-        this.id_pallet = id_pallet;
+    public void setWeight(float weight) {
+        this.weight = weight;
     }
 
     @Override
@@ -64,7 +74,7 @@ public class Package {
         return "Package{" +
                 "desc='" + description + '\'' +
                 ", weight=" + weight +
-                ", id_pallet=" + id_pallet +
+                ", id_pallet=" + idPallet +
                 '}';
     }
 }

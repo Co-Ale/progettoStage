@@ -6,8 +6,8 @@ import com.example.demo.entity.Package;
 
 public interface InterfacePackegService {
 
-    public void create(long palletId, Package pack);
+    public void create(Long palletId, Package pack) throws Exception;
     public void update(Package pack);
-    public void delete(long id);
-    public Iterable<Package> byPalletId (long id);
+    public void delete(Long id);
+    public Iterable<Package> byPalletId (Long id) throws Exception;
 }

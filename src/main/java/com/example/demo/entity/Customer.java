@@ -1,10 +1,16 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+//import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +19,13 @@ public class Customer {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     Long id;
-    
+     /*
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "custumerId")
+    private List<Shipment> emails;
+    */
+    @OneToMany(mappedBy = "user",  fetch = FetchType.EAGER)
+    private List<Shipment> shipments;
+
     @Column(name="email", length=50,nullable=true, unique=true)
     String email;
 
