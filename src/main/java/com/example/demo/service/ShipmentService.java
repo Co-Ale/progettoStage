@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Shipment;
+import com.example.demo.entity.Customer;
+
+import com.example.demo.repo.RepoCustomer;
 import com.example.demo.repo.RepoShipment;
 import com.example.demo.utility.ShipmentState;
 
@@ -19,6 +22,8 @@ import com.example.demo.utility.ShipmentState;
 public class ShipmentService implements InterfaceShipmentService {
     @Autowired
     private RepoShipment repoShipment;
+    @Autowired
+    private RepoCustomer repoCustomer;
 
     @Override
     public Iterable<Shipment>  getAll() {
@@ -27,14 +32,21 @@ public class ShipmentService implements InterfaceShipmentService {
 
 
     @Override
-    public void create(Shipment sp) {
-
-        Date oggi = new Date();   // Data di oggi
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");   // Qui decido il formato di visualizzazione
-
-        sp.setShipment_date(sdf.format( oggi ));
-        sp.setStatus( ShipmentState.OPEN);
-        repoShipment.save(sp);
+    public void create(Long custumerId, Shipment sp) throws Exception {
+        Optional<Customer> custumer =  repoCustomer.findById(custumerId);
+        if(custumer.isPresent()){
+            sp.setCustumer(custumer.get());
+            Date oggi = new Date();   // Data di oggi
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");   // Qui decido il formato di visualizzazione
+    
+            sp.setShipment_date(sdf.format( oggi ));
+            sp.setStatus( ShipmentState.OPEN);
+            repoShipment.save(sp);
+        }else{
+            throw new Exception("custumer not present");
+        }
+        
+       
     }
     @Override
     public void delete(long id) {
@@ -55,11 +67,18 @@ public class ShipmentService implements InterfaceShipmentService {
     @Override
     public List<Shipment> getByClientId(Long id)throws Exception  {
         //return repoShipment.findBycustumerId(id);
-        List<Shipment> spByClienId =repoShipment.findBycustumerId(id);
+        Optional<Customer> customer = repoCustomer.findById(id);
+        List<Shipment> spByClienId;
+        if(  customer.isPresent()  ){
+            spByClienId = repoShipment.findByCustomer_id(id);     
+        }else{
+            throw new Exception("Customer does not exist Exeption");
+        }
         if(!spByClienId.isEmpty()){
             return spByClienId;
         }else{
             throw new Exception("Customer Shipment list empty Exeption");
+
         }
         
     }

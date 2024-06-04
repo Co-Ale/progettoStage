@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -23,7 +24,8 @@ public class Customer {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "custumerId")
     private List<Shipment> emails;
     */
-    @OneToMany(mappedBy = "user",  fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer",  fetch = FetchType.EAGER)
+   // @JoinColumn(name = "")
     private List<Shipment> shipments;
 
     @Column(name="email", length=50,nullable=true, unique=true)

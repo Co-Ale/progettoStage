@@ -2,15 +2,19 @@ package com.example.demo.entity;
 
 
 
-import org.hibernate.annotations.ManyToAny;
+//import org.hibernate.annotations.ManyToAny;
 
 import com.example.demo.utility.ShipmentState;
+
+
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+//import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,13 +30,12 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.AUTO) 
     long id;
 
+    //@Column(name = "custumerId" ,nullable = true)
+    //long custumerId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name =  "customer_id" )
+    private Customer customer;
     
-    
-    @Column(name = "custumerId" ,nullable = true)
-    long custumerId;
-    @ManyToOne
-    @JoinColumn(name =  "userId")
-    private Customer user;
     /*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "custumerId")
@@ -41,6 +44,7 @@ public class Shipment {
     
     @Column(name = "description" )
     String description;
+    
     @Column(nullable = true)
     String shipment_date;
     
@@ -52,11 +56,11 @@ public class Shipment {
     public Shipment(){
     }
 
-    public Shipment(String description, String shipment_date, long custumerId) {
+    public Shipment(String description, String shipment_date, Customer customer) {
         this.status =  ShipmentState.OPEN;
         this.description = description;
         this.shipment_date = shipment_date;
-        this.custumerId = custumerId;
+        this.customer = customer;
     }
 
     public long getId() {
@@ -67,12 +71,15 @@ public class Shipment {
         this.id = id;
     }
 
-    public long getCustumerId() {
-        return this.custumerId;
+    public long getCustomerId() {
+        return this.customer.getId();
     }
 
-    public void setCustumerId(long custumerId) {
-        this.custumerId = custumerId;
+    // public void setCustumerId(long custumerId) {
+    //    this.custumerId = custumerId;
+    //}
+    public void setCustumer(Customer customer){
+        this.customer = customer;
     }
 
     public String getDescription() {
@@ -104,7 +111,7 @@ public class Shipment {
         return "Shipment{" +
                 "desc='" + description + '\'' +
                 ", shipment_date='" + shipment_date + '\'' +
-                ", custumerId=" + custumerId +
+                ", custumerId=" + customer.getId() +
                 ", status=" + status +
                 '}';
     }

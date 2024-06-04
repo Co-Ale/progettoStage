@@ -22,8 +22,8 @@ public class ShipmentController {
     @PostMapping("/client/{clientId}")
     public ResponseEntity<String> createOrder(@PathVariable long clientId , @RequestBody Shipment model){
         try{
-            model.setCustumerId(clientId);
-            shipmentService.create(model);
+            //model.setCustumerId(clientId);
+            shipmentService.create(clientId ,model);
             return new ResponseEntity<String>("Created shipment id = " + model.getId() , HttpStatus.CREATED);
         }catch ( Exception e ){
             return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -52,6 +52,14 @@ public class ShipmentController {
         try{
             shipmentService.closeShipment(idShipment);
             return new ResponseEntity<String>("shipment colse" , HttpStatus.OK );
+        }catch ( Exception e ){
+            return new ResponseEntity<String>( "Error shipment fail to colse"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/byClientId/{clientId}")
+    public ResponseEntity<?>  getCustomerSchipment(@PathVariable long clientId){
+        try{
+            return new ResponseEntity<>(shipmentService.getByClientId(clientId) ,HttpStatus.OK );
         }catch ( Exception e ){
             return new ResponseEntity<String>( "Error shipment fail to colse"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
         }
