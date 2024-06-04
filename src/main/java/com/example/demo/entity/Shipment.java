@@ -2,12 +2,15 @@ package com.example.demo.entity;
 
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 //import org.hibernate.annotations.ManyToAny;
 
 import com.example.demo.utility.ShipmentState;
-
-
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +22,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,14 +33,26 @@ import jakarta.persistence.Table;
 public class Shipment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 
-    long id;
+    Long id;
 
     //@Column(name = "custumerId" ,nullable = true)
     //long custumerId;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name =  "customer_id" )
     private Customer customer;
     
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinTable(
+        name = "Shipment_det",
+        joinColumns = @JoinColumn (
+            name = "ShipmentId"
+        ),
+        inverseJoinColumns = @JoinColumn(
+            name = "palletId"
+        )
+    )
+    private Set<Pallet> pallets = new HashSet<>();
     /*
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "custumerId")
@@ -61,6 +78,10 @@ public class Shipment {
         this.description = description;
         this.shipment_date = shipment_date;
         this.customer = customer;
+    }
+
+    public Set<Pallet> getPallets(){
+        return pallets;
     }
 
     public long getId() {

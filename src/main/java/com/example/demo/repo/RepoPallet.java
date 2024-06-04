@@ -11,6 +11,8 @@ import com.example.demo.entity.Pallet;
 //import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.EntityGraph;
+
 //import jakarta.annotation.Nonnull;
 
 //import org.springframework.lang.NonNull;
@@ -27,7 +29,7 @@ public interface RepoPallet extends CrudRepository<Pallet ,Long> {
 
     // List<Pallet> findByStatus(ShipmentState status);
     //  List<Pallet> findBycustumerId(long id);
-
+    @EntityGraph(attributePaths = {"shipments"} )
     @NonNull Optional<Pallet> findById(@NonNull Long id);
 
     //List<Pallet> findAllBy(long id);

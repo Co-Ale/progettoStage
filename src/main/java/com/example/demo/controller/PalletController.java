@@ -12,14 +12,14 @@ import com.example.demo.entity.Pallet;
 import com.example.demo.service.PalletService;
 
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "/pallet")
 public class PalletController {
     
     @Autowired
     private PalletService palletService;
 
 
-    @PostMapping("/shipment/{shipmentId}")
+    @PostMapping("/{shipmentId}")
     public  ResponseEntity<String>  createCustomer(@RequestBody Pallet model, @PathVariable long shipmentId ){
         try{
             palletService.create(model, shipmentId );
@@ -28,10 +28,10 @@ public class PalletController {
            return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        }
+    }
 
 
-
+    /*
     @GetMapping("/byShipmentId/{byShipmentId}")
     public ResponseEntity<?> getByShipmentId(@PathVariable Long byShipmentId){
         try{
@@ -41,7 +41,7 @@ public class PalletController {
         }
         //return palletService.getByShipmentId(byShipmentId);
         //return "/byPalletId/" + palletId;
-    }
+    } */
 
 
 }

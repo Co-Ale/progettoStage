@@ -24,7 +24,7 @@ public class Customer {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "custumerId")
     private List<Shipment> emails;
     */
-    @OneToMany(mappedBy = "customer",  fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer",  fetch = FetchType.LAZY)
    // @JoinColumn(name = "")
     private List<Shipment> shipments;
 

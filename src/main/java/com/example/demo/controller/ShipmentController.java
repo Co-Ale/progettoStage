@@ -23,8 +23,8 @@ public class ShipmentController {
     public ResponseEntity<String> createOrder(@PathVariable long clientId , @RequestBody Shipment model){
         try{
             //model.setCustumerId(clientId);
-            shipmentService.create(clientId ,model);
-            return new ResponseEntity<String>("Created shipment id = " + model.getId() , HttpStatus.CREATED);
+            long generatedId = shipmentService.create(clientId ,model);
+            return new ResponseEntity<String>("Created shipment id = " + generatedId , HttpStatus.CREATED);
         }catch ( Exception e ){
             return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -64,6 +64,15 @@ public class ShipmentController {
             return new ResponseEntity<String>( "Error shipment fail to colse"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/byPalletId/{palletId}")
+    public ResponseEntity<?>  getByPalletId(@PathVariable Long palletId){
+        try{
+            return new ResponseEntity<>(shipmentService.getShipmentsByPalletId(palletId) ,HttpStatus.OK );
+        }catch ( Exception e ){
+            return new ResponseEntity<String>( "Error shipment fail to colse"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
+        }
+    }
+
     
 }
     /*

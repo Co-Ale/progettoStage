@@ -6,14 +6,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Shipment;
 import com.example.demo.entity.Customer;
-
+import com.example.demo.entity.Pallet;
 import com.example.demo.repo.RepoCustomer;
+import com.example.demo.repo.RepoPallet;
 import com.example.demo.repo.RepoShipment;
 import com.example.demo.utility.ShipmentState;
 
@@ -24,6 +26,8 @@ public class ShipmentService implements InterfaceShipmentService {
     private RepoShipment repoShipment;
     @Autowired
     private RepoCustomer repoCustomer;
+    @Autowired
+    private RepoPallet repoPallet;
 
     @Override
     public Iterable<Shipment>  getAll() {
@@ -32,7 +36,7 @@ public class ShipmentService implements InterfaceShipmentService {
 
 
     @Override
-    public void create(Long custumerId, Shipment sp) throws Exception {
+    public long create(Long custumerId, Shipment sp) throws Exception {
         Optional<Customer> custumer =  repoCustomer.findById(custumerId);
         if(custumer.isPresent()){
             sp.setCustumer(custumer.get());
@@ -41,7 +45,7 @@ public class ShipmentService implements InterfaceShipmentService {
     
             sp.setShipment_date(sdf.format( oggi ));
             sp.setStatus( ShipmentState.OPEN);
-            repoShipment.save(sp);
+            return repoShipment.save(sp).getId();
         }else{
             throw new Exception("custumer not present");
         }
@@ -100,6 +104,15 @@ public class ShipmentService implements InterfaceShipmentService {
     public void update( Shipment shipment) {
         repoShipment.save(shipment);
         
+    }
+
+   
+    public Set<Shipment> getShipmentsByPalletId(Long id)throws Exception  {
+        //return repoShipment.findBycustumerId(id);
+        Optional<Pallet> customer = repoPallet.findById(id);
+
+        return customer.get().getShipment();
+
     }
 }
 /*

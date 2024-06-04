@@ -7,7 +7,7 @@ import com.example.demo.entity.*;
 public interface InterfaceShipmentService {
 
     
-    public void create(Long costumerId , Shipment costumer)throws Exception;
+    public long create(Long costumerId , Shipment costumer)throws Exception;
     public void update(Shipment shipment);
     public void delete(long id);
   
