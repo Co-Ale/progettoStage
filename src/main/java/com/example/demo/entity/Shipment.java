@@ -8,9 +8,9 @@ import java.util.Set;
 //import org.hibernate.annotations.ManyToAny;
 
 import com.example.demo.utility.ShipmentState;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

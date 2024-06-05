@@ -53,7 +53,7 @@ public class ShipmentService implements InterfaceShipmentService {
        
     }
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         repoShipment.deleteById(id);
 
     }

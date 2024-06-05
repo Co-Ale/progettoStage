@@ -33,7 +33,7 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     public ResponseEntity<?> getCustomer(@PathVariable long customerId){
         try{
-            return new ResponseEntity<Customer>( customerService.findById(customerId), HttpStatus.FOUND);
+            return new ResponseEntity<Customer>( customerService.getById(customerId), HttpStatus.FOUND);
         }catch(Exception e ){
             return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
         }

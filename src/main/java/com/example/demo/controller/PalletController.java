@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.lang.Long;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +29,6 @@ public class PalletController {
         }
 
     }
-
-
-    /*
     @GetMapping("/byShipmentId/{byShipmentId}")
     public ResponseEntity<?> getByShipmentId(@PathVariable Long byShipmentId){
         try{
@@ -41,7 +38,10 @@ public class PalletController {
         }
         //return palletService.getByShipmentId(byShipmentId);
         //return "/byPalletId/" + palletId;
-    } */
+    } 
+
+    /*
+    */
 
 
 }

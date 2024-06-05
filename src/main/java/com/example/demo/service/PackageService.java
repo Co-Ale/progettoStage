@@ -1,7 +1,5 @@
 package com.example.demo.service;
 
-
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -45,21 +43,17 @@ public class PackageService implements InterfacePackegService {
         }else{
             throw new Exception("Pallet not found by id Exception");
         }
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'byPalletId'");
+        
     }
 
     @Override
-    public void update(Package shipment) {
-        
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update(Package pack) {
+        repoPackage.save( pack);   
     }
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repoPackage.deleteById(id);
     }
 
     

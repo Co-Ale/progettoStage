@@ -9,7 +9,7 @@ public interface InterfaceShipmentService {
     
     public long create(Long costumerId , Shipment costumer)throws Exception;
     public void update(Shipment shipment);
-    public void delete(long id);
+    public void delete(Long id);
   
     public Iterable<Shipment> getAll() throws Exception;
     public List<Shipment> getByClientId(Long id) throws Exception;

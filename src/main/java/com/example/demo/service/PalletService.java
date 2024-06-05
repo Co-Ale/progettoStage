@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import com.example.demo.repo.RepoShipment;
 
 
 @Service
-public class PalletService {
+public class PalletService implements InterfacePalletService {
     /*
     @Autowired
     private RepoShipmentDetails repoShipmentDetails; */
@@ -26,21 +25,37 @@ public class PalletService {
     @Autowired
     private RepoShipment repoShipment;
 
-    public void create( Pallet pallet, Long shipmentId){
+    @Override
+    public void create( Pallet pallet, Long shipmentId) throws Exception {
 
         Optional<Shipment> shipment =  repoShipment.findById(shipmentId);
         //pallet.setId(0);
-        
-        pallet.getShipment().add(shipment.get());
-        shipment.get().getPallets().add(pallet);
-        repoPallet.save(pallet);
+        if (shipment.isPresent()) {
+            pallet.getShipment().add(shipment.get());
+            shipment.get().getPallets().add(pallet);
+            repoPallet.save(pallet);
+        }else{
+            throw new Exception("Shipment not found Exception");
+        }
+      
         //Shipment_det sd = new Shipment_det();
         //sd.setidShipment_det(shipmentId);
         //sd.setIdPallet(pallet.getId());
         //repoShipmentDetails.save(sd);
     }
+    @Override
+    public Set<Pallet> getByShipmentId(Long sPId) throws Exception {
+        Optional<Shipment> shipment = repoShipment.findById(sPId);
+        if(shipment.isPresent()){
+            return shipment.get().getPallets();
+        }else{
+            throw new Exception("Shipment not found Exception");
+        }
+    }
+
 
     /*
+    @Override
     public List<Pallet> getByShipmentId(Long sPId) throws Exception {
         List<Shipment_det> idList = repoShipmentDetails.findByIdShipment(sPId);
         List<Pallet> palList = new ArrayList<>();

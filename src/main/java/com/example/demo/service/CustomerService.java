@@ -24,17 +24,17 @@ public class CustomerService implements InterfaceCustomerService{
         
     }
     @Override
-    public void update(long id, Customer costumer) {
+    public void update(Long id, Customer costumer) {
        
         repoCustomer.save(costumer);
       
     }
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         repoCustomer.deleteById(id);
     }
     @Override
-    public Customer findById(Long id) throws Exception {
+    public Customer getById(Long id) throws Exception {
         Optional<Customer> opId  = repoCustomer.findById(id);
         if (opId.isPresent() ){
             return opId.get();

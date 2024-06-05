@@ -12,10 +12,10 @@ public interface InterfaceCustomerService {
     //public Collection<Customer> getAll();
     public Iterable<Customer> getAll() throws Exception;
     public void create(Customer costumer);
-    public void update(long id, Customer costumer);
-    public void delete(long id);
+    public void update(Long id, Customer costumer);
+    public void delete(Long id);
    
 
     //public Collection<Customer> get();
-    public Customer findById(Long id) throws Exception;
+    public Customer getById(Long id) throws Exception;
 }
