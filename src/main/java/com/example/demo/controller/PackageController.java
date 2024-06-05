@@ -22,11 +22,11 @@ public class PackageController {
     PackageService packageService;
 
 
-    @PostMapping("/pallet/{palletId} ")
-    public ResponseEntity<?> PostPallet(@PathVariable Long id, @RequestBody Package model){
+    @PostMapping("/{palletId}")
+    public ResponseEntity<?> PostPallet(@PathVariable Long palletId, @RequestBody Package model){
         try {
             
-            packageService.create(id,model);
+            packageService.create(palletId,model);
             
             return new ResponseEntity<> ( "created package id = "+ model.getId() , HttpStatus.CREATED );
     
@@ -38,8 +38,14 @@ public class PackageController {
 
 
     @GetMapping("/byPalletId/{palletId}")
-    public String getPallet(@PathVariable int palletId){
-        return "/byShipmentId/" + palletId;
+    public  ResponseEntity<?>  getPallet(@PathVariable Long palletId){
+        try {
+            return new ResponseEntity<>(packageService.byPalletId(palletId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<> (e.getMessage() ,HttpStatus.BAD_REQUEST );
+            
+        }
+        //return "/byShipmentId/" + palletId;
     }
  
 

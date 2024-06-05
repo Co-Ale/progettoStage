@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 //import org.springframework.data.annotation.Id;
@@ -16,6 +17,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,8 +28,14 @@ public class Pallet {
     long id;
 
     @ManyToMany( mappedBy = "pallets", fetch = FetchType.LAZY)
-    
     private Set<Shipment> shipments = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "pallet",  fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Package> packegs;
+
+    
     @Column()
     String description;
     
@@ -40,6 +48,12 @@ public class Pallet {
 
     public Pallet() {
     }
+
+
+    public Set<Package> getPackegs() {
+        return this.packegs;
+    }
+
     public Set<Shipment> getShipment(){
         return this.shipments;
     }
