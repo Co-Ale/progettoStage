@@ -4,7 +4,9 @@ package com.example.demo.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 //import org.springframework.data.annotation.Id;
 
@@ -16,13 +18,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Pallet")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Pallet {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pallet_generator")
+    @SequenceGenerator(name = "pallet_generator", sequenceName = "pallet_seq", initialValue=2)
     long id;
 
     @ManyToMany( mappedBy = "pallets", fetch = FetchType.LAZY)
@@ -30,7 +38,7 @@ public class Pallet {
 
 
     @OneToMany(mappedBy = "pallet",  fetch = FetchType.LAZY)
-    @JsonIgnore
+    //@JsonIgnore
     private Set<Package> packegs;
 
     

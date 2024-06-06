@@ -1,0 +1,16 @@
+INSERT INTO public.users(
+	id, username, password, created_by, updated_by, created_at, updated_at)
+	VALUES 
+	(nextval('users_seq'), 'andrea', 'password', NULL, NULL, '2021-05-31 11:30:00', NULL);
+
+INSERT INTO public.roles(
+	id, name, created_by, updated_by, created_at, updated_at)
+	VALUES 
+	(nextval('roles_seq'), 'ROLE_USER', NULL, NULL, '2021-05-31 10:43:00', NULL),
+	(nextval('roles_seq'), 'ROLE_ADMIN', NULL, NULL, '2021-05-31 10:43:00', NULL);
+	
+INSERT INTO public.user_role(
+	user_id, role_id)
+	VALUES
+	(1, 1),
+	(1, 2);

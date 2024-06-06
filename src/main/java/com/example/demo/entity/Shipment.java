@@ -8,9 +8,9 @@ import java.util.Set;
 //import org.hibernate.annotations.ManyToAny;
 
 import com.example.demo.utility.ShipmentState;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,14 +25,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 
 @Entity
 @Table(name="Shipment")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Shipment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) 
+    //@GeneratedValue(strategy = GenerationType.AUTO) 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipment_generator")
+    @SequenceGenerator(name = "shipment_generator", sequenceName = "shipment_seq", initialValue=2)
     Long id;
 
     //@Column(name = "custumerId" ,nullable = true)
@@ -42,7 +48,7 @@ public class Shipment {
     private Customer customer;
     
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
+    //@JsonIgnore
     @JoinTable(
         name = "Shipment_det",
         joinColumns = @JoinColumn (
