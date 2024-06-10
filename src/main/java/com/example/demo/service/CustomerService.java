@@ -5,6 +5,7 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.entity.Customer;
@@ -19,12 +20,10 @@ public class CustomerService implements InterfaceCustomerService{
     
     @Override
     public void create(Customer customer) {
-      
         repoCustomer.save(customer);
     }
     @Override
     public void update(Long id, Customer costumer) {
-       
         repoCustomer.save(costumer);
       
     }
@@ -43,7 +42,7 @@ public class CustomerService implements InterfaceCustomerService{
     }
     
     @Override
-    public Iterable<Customer> getAll() throws Exception {
+    public List<Customer> getAll() throws Exception {
         List<Customer> allC = repoCustomer.findAll();
         if(!allC.isEmpty()){
             return allC;

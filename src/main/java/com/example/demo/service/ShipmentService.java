@@ -30,6 +30,18 @@ public class ShipmentService implements InterfaceShipmentService {
     private RepoPallet repoPallet;
 
     @Override
+    public Shipment  getById(Long id)  throws Exception {
+        Optional<Shipment> s = repoShipment.findById(id);
+        if(s.isPresent()){
+            return s.get();
+        }else{
+            throw new Exception("Shipment not present");
+        }
+       
+    }
+
+
+    @Override
     public Iterable<Shipment>  getAll() {
        return repoShipment.findAll();
     }
@@ -94,25 +106,19 @@ public class ShipmentService implements InterfaceShipmentService {
             repoShipment.save(sp.get());
         }else{
             throw new Exception("Shipment not found");
-        }
-
-        
-      
-    
+        }   
     }
+
     @Override
     public void update( Shipment shipment) {
         repoShipment.save(shipment);
         
     }
-
    
     public Set<Shipment> getShipmentsByPalletId(Long id)throws Exception  {
         //return repoShipment.findBycustumerId(id);
         Optional<Pallet> customer = repoPallet.findById(id);
-
         return customer.get().getShipment();
-
     }
 }
 /*
