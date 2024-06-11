@@ -1,0 +1,2 @@
+ciao come va test é*: :;; \n
+ "asda" : "ada", 

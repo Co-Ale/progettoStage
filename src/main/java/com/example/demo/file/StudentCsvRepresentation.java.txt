@@ -1,0 +1,25 @@
+package com.example.demo.file;
+
+import com.opencsv.bean.CsvBindByName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class StudentCsvRepresentation {
+
+    @CsvBindByName(column = "column1")
+    private String c1;
+    @CsvBindByName(column = "column2")
+    private String c2;
+    @CsvBindByName(column = "column3")
+    private String c3;
+    @CsvBindByName(column = "column4")
+    private String c4;
+}
