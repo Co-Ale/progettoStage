@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.entity.Customer;
 import com.example.demo.service.CustomerService;
@@ -16,6 +17,11 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+    
+    
+
+
+
 
     //Crea nuovo cliente
     @PostMapping("/insert")
@@ -24,7 +30,8 @@ public class CustomerController {
             customerService.create(model);
             return new ResponseEntity<String>("Created id = " + model.getId() , HttpStatus.CREATED);
         }catch(Exception e ){
-           return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "duplicate Email", e);
+            //return new ResponseEntity<String>( e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         
     }
@@ -35,7 +42,8 @@ public class CustomerController {
         try{
             return new ResponseEntity<Customer>( customerService.getById(customerId), HttpStatus.FOUND);
         }catch(Exception e ){
-            return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "customer Not Found", e);
+            //return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
         }
         
     }
@@ -45,7 +53,9 @@ public class CustomerController {
         try{
             return new ResponseEntity<>( customerService.getAll(), HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+            //return new ResponseEntity<String>( e.getMessage(), HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException( HttpStatus.BAD_REQUEST, "customer list void", e);
+
         }
         
     }

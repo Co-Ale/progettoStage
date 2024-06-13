@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Package;
 import com.example.demo.entity.Pallet;
+import com.example.demo.exception.PalletNotFoundException;
 import com.example.demo.repo.RepoPackage;
 import com.example.demo.repo.RepoPallet;
 
@@ -35,13 +36,14 @@ public class PackageService implements InterfacePackegService {
         
     }
     @Override
-    public Set<Package> byPalletId(Long id)throws Exception {
+    public Set<Package> byPalletId(Long id) {
         //List<Package> packByPallId = repoPackage.findByPallet_id(id);
         Optional<Pallet> pallet = repoPallet.findById(id);
         if(pallet.isPresent()){
             return pallet.get().getPackegs();
         }else{
-            throw new Exception("Pallet not found by id Exception");
+            //throw new Exception("Pallet not found by id Exception");
+            throw new PalletNotFoundException("Pallet not found by id Exception");
         }
         
     }

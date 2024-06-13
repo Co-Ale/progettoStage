@@ -61,7 +61,7 @@ public class ShipmentController {
         try{
             return new ResponseEntity<>(shipmentService.getByClientId(clientId) ,HttpStatus.OK );
         }catch ( Exception e ){
-            return new ResponseEntity<String>( "Error shipment fail to colse"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>( "Error shipment not found"+ e.getMessage(),   HttpStatus.BAD_REQUEST);
         }
     }
     @GetMapping("/byPalletId/{palletId}")

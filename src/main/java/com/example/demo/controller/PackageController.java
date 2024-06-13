@@ -39,12 +39,14 @@ public class PackageController {
 
     @GetMapping("/byPalletId/{palletId}")
     public  ResponseEntity<?>  getPallet(@PathVariable Long palletId){
+        /*
         try {
             return new ResponseEntity<>(packageService.byPalletId(palletId), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<> (e.getMessage() ,HttpStatus.BAD_REQUEST );
-            
+            return new ResponseEntity<> (e.getMessage() ,HttpStatus.BAD_REQUEST ); 
         }
+        */
+        return new ResponseEntity<>(packageService.byPalletId(palletId), HttpStatus.OK);
         //return "/byShipmentId/" + palletId;
     }
  
